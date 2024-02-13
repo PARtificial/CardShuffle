@@ -1,0 +1,44 @@
+// Fill the deck with 52 unique cards
+
+
+
+import java.util.Random;
+
+public class CardDriver {
+    public static void main(String[] args) {
+        Card[] deck = new Card[52];
+        String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+        String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+        int index = 0;
+
+        // Fill the deck with 52 unique cards
+        for (String suit : suits) {
+            for (String rank : ranks) {
+                deck[index++] = new Card(suit, rank);
+            }
+        }
+
+        // Apply 100 random transpositions to the deck
+        Random rand = new Random();
+        for (int i = 0; i < 100; i++) {
+            int index1 = rand.nextInt(52);
+            int index2 = rand.nextInt(52);
+            Card temp = deck[index1];
+            deck[index1] = deck[index2];
+            deck[index2] = temp;
+        }
+
+        // Display the deck
+        for (int i = 0; i < deck.length; i++) {
+            System.out.println(i + ": " + deck[i]);
+        }
+
+        // Find and display the index of the Queen of Clubs
+        for (int i = 0; i < deck.length; i++) {
+            if (deck[i].equals(new Card("Clubs", "Queen"))) {
+                System.out.println("The Queen of clubs was found at location " + i);
+                break;
+            }
+        }
+    }
+}
